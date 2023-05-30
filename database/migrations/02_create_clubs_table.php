@@ -13,10 +13,12 @@ return new class extends Migration
     {
         Schema::create('clubs', function (Blueprint $table) {
             $table->id();
-            $table->string('club_name');
-            $table->text('description');
-            $table->string('slug');
-            $table->string('club_thumbnail');
+            $table->string('club_title')->unique();
+            $table->string('club_tagline')->nullable();
+            $table->text('description')->nullable();
+            $table->string('slug')->unique();
+            $table->string('image')->nullable();
+            $table->string('image_url')->nullable();
             $table->timestamps();
         });
     }

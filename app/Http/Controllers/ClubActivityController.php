@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ClubActivity;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ClubActivityController extends Controller
 {
@@ -13,6 +14,25 @@ class ClubActivityController extends Controller
     public function index()
     {
         //
+    }
+
+    public function fetchActivity(){
+        $activity = ClubActivity::with(['club' => function ($query) {
+            $query->select('id', 'club_title', 'slug');
+            // jika select dari relasi harus sertakan PK (id)
+        }])
+            ->orderBy('id', 'desc')
+            ->paginate(6);
+
+        // setiap collection dari content akan di format non html tag, dan panjang karakter <= 150 words
+        $activity->each(function ($activity) {
+            $activity->content = strip_tags($activity->content);
+            $activity->content = Str::limit($activity->content, 150);
+        });
+
+        $activityData = $activity->toArray();
+
+        return response()->json($activityData);
     }
 
     /**

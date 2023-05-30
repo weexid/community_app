@@ -2,22 +2,8 @@
     <Head title="Homepage" />
     <AppLayout>
         <MainCarousel :carousels="carousel" />
-        <!-- <div v-for="item in carousel" :key="item.id">
-            <div v-if="item.image">
-                <img :src="`/storage/images/${item.image}`">
-                <h1>{{ item.heading }}</h1>
-                <h2 v-if="item.sub_heading">{{ item.sub_heading }}</h2>
-                <a v-if="item.cta_link" :href="item.cta_link">{{ item.cta_text }}</a>
-            </div>
-            <div v-if="item.image_url">
-                <img :src="item.image_url">
-                <h1>{{ item.heading }}</h1>
-                <h2 v-if="item.sub_heading">{{ item.sub_heading }}</h2>
-                <a v-if="item.cta_link" :href="item.cta_link">{{ item.cta_text }}</a>
-            </div>
-        </div> -->
-        <ClubSection/>
-        <ActivitySection />
+        <ClubSection :clubs="club"/>
+        <ActivitySection :activities="activity" />
     </AppLayout>
 
     <!-- scroller -->
@@ -42,6 +28,8 @@
 
     defineProps({
         carousel : Object,
+        club: Object,
+        activity: Object,
     })
 
 

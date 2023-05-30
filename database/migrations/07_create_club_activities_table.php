@@ -13,15 +13,15 @@ return new class extends Migration
     {
         Schema::create('club_activities', function (Blueprint $table) {
             $table->id();
-            $table->string('activity_name');
-            $table->text('description');
+            $table->string('title');
+            $table->text('content');
             $table->string('slug');
-            $table->string('thumbnail');
+            $table->string('image');
+            $table->integer('views')->default(0);
             $table->unsignedBigInteger('club_id');
             
             $table->foreign('club_id')->references('id')->on('clubs');
 
-            $table->integer('views');
             $table->timestamps();
         });
     }

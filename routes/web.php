@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ClubActivityController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
@@ -31,6 +32,7 @@ use Inertia\Inertia;
 // });
 
 Route::get('/', [HomeController::class, 'index']);
+Route::get('/paginate/activities', [ClubActivityController::class, 'fetchActivity']);
 
 
 Route::get('/dashboard', function () {

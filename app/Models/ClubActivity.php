@@ -12,12 +12,16 @@ class ClubActivity extends Model
     protected $table = 'club_activities';
 
     protected $fillable = [
-        'activity_name',
-        'description',
+        'title',
+        'content',
         'slug',
-        'thumbnail',
-        'blob_id',
+        'image',
         'club_id',
         'views'
     ];
+
+    public function club()
+    {
+        return $this->belongsTo(Club::class, 'club_id');
+    }
 }

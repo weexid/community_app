@@ -11,5 +11,9 @@ class Club extends Model
 
     protected $table = 'clubs';
 
-    protected $fillable = ['club_name', 'description', 'slug', 'club_thumbnail'];
+    protected $fillable = ['club_title', 'club_tagline', 'description', 'slug', 'image', 'image_url'];
+
+    public function activities(){
+        return $this->hasMany(ClubActivity::class, 'club_id');
+    }
 }
