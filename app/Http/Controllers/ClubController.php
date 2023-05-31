@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Club;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ClubController extends Controller
 {
@@ -12,7 +13,11 @@ class ClubController extends Controller
      */
     public function index()
     {
-        //
+        $clubs = Club::select('id', 'club_title', 'slug','image', 'image_url', DB::raw('(SELECT COUNT(*) FROM users WHERE users.club_id = clubs.id) as members_count'))
+            ->get();
+
+
+        return dd($clubs);
     }
 
     /**
