@@ -12,9 +12,17 @@ class ClubCarousel extends Model
     protected $table = 'club_carousels';
 
     protected $fillable = [
-        'media_src',
-        'alt_name',
-        'club_id'
+        'image',
+        'image_url',
+        'heading',
+        'sub_heading',
+        'cta_text',
+        'cta_link',
     ];
+
+    public function club()
+    {
+        return $this->belongsTo(Club::class, 'club_id');
+    }
 
 }

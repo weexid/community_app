@@ -1,9 +1,9 @@
 <template>
     <!-- Desktop nav -->
     <div class="flex flex-wrap justify-end gap-1 items-center hidden md:flex">
-        <a href="#" :class="{ 'active': $inertia.page.url === '/' }" class="py-2 px-5 border-b border-transparent text-white hover:border-b hover:border-pink-200 transition-all">Home</a>
+        <Link href="/" :class="{ 'active': $inertia.page.url === '/' }" class="py-2 px-5 border-b border-transparent text-white hover:border-b hover:border-pink-200 transition-all">Home</Link>
         <a href="#" :class="{ 'active': $inertia.page.url === '/activities' }" class="py-2 px-5 border-b border-transparent text-white hover:border-b hover:border-pink-200 transition-all" >Activities</a>
-        <a href="#" :class="{ 'active': $inertia.page.url === '/clubs' }" class="py-2 px-5 border-b border-transparent text-white hover:border-b hover:border-pink-200 transition-all" >Clubs</a>
+        <Link href="/clubs" :class="{ 'active': $inertia.page.url === '/clubs' }" class="py-2 px-5 border-b border-transparent text-white hover:border-b hover:border-pink-200 transition-all" >Clubs</Link>
         <a href="#" :class="{ 'active': $inertia.page.url === '/about' }" class="py-2 px-5 border-b border-transparent text-white hover:border-b hover:border-pink-200 transition-all" >About</a>
 
         <!-- jika user belum login -->
@@ -29,7 +29,8 @@
 </template>
 
 <script setup>
-    import { defineEmits } from 'vue';
+    // import { defineEmits } from 'vue';
+    import { Link } from '@inertiajs/vue3';
 
     const emmits = defineEmits(['toggle', 'openSearch']);
 

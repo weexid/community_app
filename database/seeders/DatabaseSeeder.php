@@ -16,6 +16,10 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             MainCarouselSeeder::class,
             ClubSeeder::class,
+            ClubMemberSeeder::class,
+            ClubActivitySeeder::class,
+            ClubCarouselSeeder::class,
+
         ]);
     }
 }

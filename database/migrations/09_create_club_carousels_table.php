@@ -13,8 +13,12 @@ return new class extends Migration
     {
         Schema::create('club_carousels', function (Blueprint $table) {
             $table->id();
-            $table->string('media_src');
-            $table->string('alt_name');
+            $table->string('image')->nullable();
+            $table->string('image_url')->nullable();
+            $table->string('heading');
+            $table->string('sub_heading')->nullable();
+            $table->string('cta_text')->nullable();
+            $table->string('cta_link')->nullable();
             $table->unsignedBigInteger('club_id');
 
             $table->foreign('club_id')->references('id')->on('clubs');

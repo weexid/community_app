@@ -17,7 +17,16 @@ class Club extends Model
         return $this->hasMany(ClubActivity::class, 'club_id');
     }
 
+    public function carousel(){
+        return $this->hasMany(ClubCarousel::class, 'club_id');
+    }
+
     public function members(){
         return $this->hasMany(User::class, 'club_id');
+    }
+    
+    public function getRouteKeyName()
+    {
+        return 'slug';
     }
 }

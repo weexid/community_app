@@ -47,26 +47,5 @@ class MainCarouselSeeder extends Seeder
         foreach ($data as $carousel) {
             MainCarousel::create($carousel);
         }
-
-        // $faker = Faker::create();
-        // $faker->locale('id_ID');
-
-        // for($i = 0; $i < 5; $i++){
-        //     if($i == 2 && $i == 3) {
-        //         DB::table('main_carousels')->insert([
-        //             'image_url' => $faker->imageUrl(1300, 650),
-        //             'heading' => $faker->sentence(4),
-        //             'sub_heading' => $faker->sentence(6),
-        //             'cta_link' => $faker->url(),
-        //         ]);
-        //     }
-        //     else{
-        //         DB::table('main_carousels')->insert([
-        //             'image' => 'dummy-img.jpg',
-        //             'heading' => $faker->sentence(4),
-        //             'sub_heading' => $faker->sentence(6),
-        //         ]);
-        //     }
-        // }
     }
 }

@@ -12,7 +12,7 @@
                 :style="{ 'background-image': club.image ? `url('/storage/images/${club.image}')` : `url('${club.image_url}')` }"
                 class="w-full md:w-1/3 lg:w-1/5 h-[300px] bg-gray-500 bg-cover bg-center relative flex items-center justify-center">
 
-                <a class="" id="link" :href="`/clubs/${club.slug}`">
+                <Link class="" id="link" :href="`/club/${club.slug}`">
                     <div id="overlay" class="absolute inset-0 bg-black opacity-50 transition ease-in-out"></div>
                     <div class="relative z-10 text-slate-200 text-2xl text-center">
                         <div class="font-bold">
@@ -20,7 +20,7 @@
                         </div>
                         <div v-if="club.club_tagline" class="text-sm">{{ club.club_tagline }}</div>
                     </div>
-                </a>
+                </Link>
 
             </div>
         </div>
@@ -32,6 +32,7 @@
     </div>
 </template>
 <script setup>
+    import {Link} from '@inertiajs/vue3';
     defineProps({
         clubs: {
             type: Object,

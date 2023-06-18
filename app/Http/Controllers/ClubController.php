@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Club;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Inertia\Inertia;
 
 class ClubController extends Controller
 {
@@ -17,7 +18,9 @@ class ClubController extends Controller
             ->get();
 
 
-        return dd($clubs);
+        return Inertia::render('Club/Index', [
+            'clubs' => $clubs
+        ]);
     }
 
     /**
@@ -40,8 +43,12 @@ class ClubController extends Controller
      * Display the specified resource.
      */
     public function show(Club $club)
-    {
-        //
+    {   
+        $club = $club->load('carousel');
+        
+        return Inertia::render('Club/DetailClub', [
+            'club' => $club,
+        ]);
     }
 
     /**
@@ -49,7 +56,11 @@ class ClubController extends Controller
      */
     public function edit(Club $club)
     {
-        //
+        $club = $club->load('carousel');
+
+        return Inertia::render('Club/Edit', [
+            'club' => $club,
+        ]);
     }
 
     /**
@@ -57,7 +68,8 @@ class ClubController extends Controller
      */
     public function update(Request $request, Club $club)
     {
-        //
+        $title = $request->input('club_title');
+        dd($title);
     }
 
     /**

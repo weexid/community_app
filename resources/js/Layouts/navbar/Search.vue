@@ -22,9 +22,9 @@
                     <h2 class="font-semibold text-md mb-2">Clubs:</h2>
                     <div class="content-club-searched">
                         <ol>
-                            <a v-for="item in searchResult.clubs" href="#" class="hover:text-pink-700">
+                            <Link v-for="item in searchResult.clubs" :href="'/club/' + item.slug" class="hover:text-pink-700">
                                 <li>{{ item.club_title }}</li>
-                            </a>
+                            </Link>
                     
                         </ol>
                     </div>
@@ -48,9 +48,10 @@
 </template>
 
 <script setup>
-    import { defineEmits } from 'vue';
+    // import { defineEmits } from 'vue';
     import {ref} from 'vue';
     import axios from 'axios';
+    import { Link } from '@inertiajs/vue3';
 
     const props = defineProps({
         isSearch: {

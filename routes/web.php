@@ -39,7 +39,11 @@ Route::get('/clubs', [ClubController::class, 'index'])->name('clubs.index');
 
 Route::get('/search', [HomeController::class, 'search']);
 
+Route::get('/club/{club}', [ClubController::class, 'show']);
 
+Route::get('/club/edit/{club}', [ClubController::class, 'edit']);
+
+Route::post('/club/update/{club}', [ClubController::class, 'update']);
 
 
 Route::get('/dashboard', function () {
