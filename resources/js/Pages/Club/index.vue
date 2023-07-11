@@ -1,12 +1,13 @@
 <script setup>
-    import { Head, Link } from '@inertiajs/vue3';
+    import { Head, Link, usePage } from '@inertiajs/vue3';
     import AppLayout from '@/Layouts/AppLayout.vue';
 
     defineProps({
         clubs: {
             type:Object
-        }
+        },
     });
+
 </script>
 
 <template>
@@ -16,12 +17,17 @@
             <div class="bg-white p-5">
                 <div class="text-4xl font-bold text-center mt-10">
                     <h1>Daftar Club</h1>
+                    <!-- success  -->
+                    <div v-if="$page.props.flash.message">
+                        {{ $page.props.flash.message }}
+                    </div>
+                    
                 </div>
                 <div v-if=clubs class="flex flex-wrap gap-5 justify-center mt-10">
                     <div v-for="item in clubs" class="w-full md:w-1/3 xl:w-1/5 border shadow-xl rounded-md">
                         <div class="w-full">
-                            <Link :href="'/club/' + item.slug">
-                                <img :src="item.image ? '/storage/images/' + item.image : item.image_url" :alt="item.club_title" class="w-full h-[250px] rounded-t-md">
+                            <Link :href="route('club', item.slug)">
+                                <img :src="item.image ? '/storage/images/' + item.image  : item.image_url" :alt="item.club_title" class="w-full h-[250px] rounded-t-md">
                             </Link>
                         </div>
                         <div class="text-center font-bold py-5 text-xl">

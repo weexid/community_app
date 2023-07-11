@@ -13,6 +13,10 @@ class Club extends Model
 
     protected $fillable = ['club_title', 'club_tagline', 'description', 'slug', 'image', 'image_url'];
 
+    public function activity(){
+        return $this->hasMany(Activity::class, 'club_id');
+    }
+
     public function activities(){
         return $this->hasMany(ClubActivity::class, 'club_id');
     }
