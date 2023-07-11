@@ -1,4 +1,5 @@
 <script setup>
+    import {Link} from '@inertiajs/vue3';
     import {ref, onMounted, computed } from 'vue';
     import axios from 'axios';
 
@@ -79,9 +80,9 @@
                                 <span class="text-sm text-slate-600">{{ activity.views }}</span>
                             </div>
                             <div class="bg-pink-500 py-1 px-3 text-white rounded-xl text-sm">
-                                <a :href="'/club/' + activity.club.slug">
+                                <Link :href="route('club', activity.club.slug)">
                                     {{ activity.club.club_title }}
-                                </a>
+                                </Link>
                             </div>
                         </div>     
                     </div>

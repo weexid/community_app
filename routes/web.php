@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\ClubActivityController;
 use App\Http\Controllers\ClubController;
 use App\Http\Controllers\HomeController;
@@ -33,17 +34,24 @@ use Inertia\Inertia;
 // });
 
 Route::get('/', [HomeController::class, 'index']);
-Route::get('/paginate/activities', [ClubActivityController::class, 'fetchActivity']);
 
-Route::get('/clubs', [ClubController::class, 'index'])->name('clubs.index');
+Route::get('/paginate/activities', [ClubActivityController::class, 'fetchActivity']);
 
 Route::get('/search', [HomeController::class, 'search']);
 
-Route::get('/club/{club}', [ClubController::class, 'show']);
+Route::prefix('club')->group(function() {
+    Route::get('/', [ClubController::class, 'index'])->name('clubs.index');
+    Route::get('/create', [ClubController::class, 'create'])->name('club.create');
+    Route::post('/store', [ClubController::class, 'store'])->name('club.store');
+    Route::get('/{club}', [ClubController::class, 'show'])->name('club');
+    Route::get('/edit/{club}', [ClubController::class, 'edit'])->name('club.edit');
+    Route::put('/update/{club}', [ClubController::class, 'update'])->name('club.update');
 
-Route::get('/club/edit/{club}', [ClubController::class, 'edit']);
+});
 
-Route::post('/club/update/{club}', [ClubController::class, 'update']);
+Route::prefix('activity')->group(function() {
+    Route::get('/', [ActivityController::class, 'index'])->name('activity.index');
+});
 
 
 Route::get('/dashboard', function () {

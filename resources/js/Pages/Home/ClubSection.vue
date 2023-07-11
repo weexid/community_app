@@ -25,9 +25,9 @@
             </div>
         </div>
         <div class="my-10 text-center">
-            <a href='/clubs' class="py-3 px-10 bg-pink-600 rounded-3xl text-white hover:text-pink-200">
+            <Link :href="route('clubs.index')" class="py-3 px-10 bg-pink-600 rounded-3xl text-white hover:text-pink-200">
                 Lihat Semua Club
-            </a>
+            </Link>
         </div>
     </div>
 </template>

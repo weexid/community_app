@@ -2,8 +2,8 @@
     <!-- Desktop nav -->
     <div class="flex flex-wrap justify-end gap-1 items-center hidden md:flex">
         <Link href="/" :class="{ 'active': $inertia.page.url === '/' }" class="py-2 px-5 border-b border-transparent text-white hover:border-b hover:border-pink-200 transition-all">Home</Link>
-        <a href="#" :class="{ 'active': $inertia.page.url === '/activities' }" class="py-2 px-5 border-b border-transparent text-white hover:border-b hover:border-pink-200 transition-all" >Activities</a>
-        <Link href="/clubs" :class="{ 'active': $inertia.page.url === '/clubs' }" class="py-2 px-5 border-b border-transparent text-white hover:border-b hover:border-pink-200 transition-all" >Clubs</Link>
+        <Link :href="route('activity.index')" :class="{ 'active': $inertia.page.url === '/activities' }" class="py-2 px-5 border-b border-transparent text-white hover:border-b hover:border-pink-200 transition-all" >Activities</Link>
+        <Link :href="route('clubs.index')" :class="{ 'active': $inertia.page.url === '/clubs' }" class="py-2 px-5 border-b border-transparent text-white hover:border-b hover:border-pink-200 transition-all" >Clubs</Link>
         <a href="#" :class="{ 'active': $inertia.page.url === '/about' }" class="py-2 px-5 border-b border-transparent text-white hover:border-b hover:border-pink-200 transition-all" >About</a>
 
         <!-- jika user belum login -->
