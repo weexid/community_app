@@ -25,7 +25,7 @@ class ClubController extends Controller
             ->get();
 
 
-        return Inertia::render('Club/index', [
+        return Inertia::render('Club/Index', [
             'clubs' => $clubs
         ]);
     }
