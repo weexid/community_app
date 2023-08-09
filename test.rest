@@ -1,0 +1,11 @@
+POST http://127.0.0.1:8000/tag/store HTTP/1.1
+content-type: application/json
+
+{
+    "tag" : "Experiment"
+
+}
+
+###
+
+GET http://127.0.0.1:8000/tag/char HTTP/1.1

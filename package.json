@@ -18,6 +18,9 @@
         "vue": "^3.2.41"
     },
     "dependencies": {
+        "@vueup/vue-quill": "^1.2.0",
+        "quill-blot-formatter": "^1.0.5",
+        "quill-image-compress": "^1.2.30",
         "vue3-carousel": "^0.3.1"
     }
 }

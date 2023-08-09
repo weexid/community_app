@@ -5,6 +5,7 @@ use App\Http\Controllers\ClubActivityController;
 use App\Http\Controllers\ClubController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TagController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
@@ -51,6 +52,21 @@ Route::prefix('club')->group(function() {
 
 Route::prefix('activity')->group(function() {
     Route::get('/', [ActivityController::class, 'index'])->name('activity.index');
+    Route::get('/videos', [ActivityController::class, 'render_videos'])->name('acvitiy.videos');
+    Route::get('/{activity:slug}', [ActivityController::class, 'show'])->name('activity.show');
+    
+    // create articles
+    Route::get('/create', [ActivityController::class, 'create'])->name('activity.create');
+    Route::post('/store', [ActivityController::class, 'store'])->name('activity.store');
+    
+    // create videos
+    Route::get('/create-video', [ActivityController::class, 'create_video'])->name('activity.create.video');
+    Route::post('/store-video', [ActivityController::class, 'store_video'])->name('activity.store.video');
+});
+
+Route::prefix('tag')->group(function() {
+    Route::get('/{tag:tag_name}', [TagController::class, 'fetchTag'])->name('tag.fetch');
+    Route::post('/store', [TagController::class, 'store'])->name('tag.store');
 });
 
 
