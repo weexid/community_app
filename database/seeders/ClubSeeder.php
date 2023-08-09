@@ -20,12 +20,12 @@ class ClubSeeder extends Seeder
                 'club_tagline' => 'Jadilah Sewangi Melati',
                 'description' => 'This club is sample purpose only',
                 'slug' => Str::slug('Club Melati'),
-                'image_url' => 'https://cdns.klimg.com/merdeka.com/i/w/news/2022/09/07/1470083/content_images/670x335/20220907123824-1-ilustrasi-bunga-melati-004-tantri-setyorini.jpg',
+                'image_url' => 'https://d1vbn70lmn1nqe.cloudfront.net/prod/wp-content/uploads/2022/08/18074743/Jarang-Disadari-Ini-X-Manfaat-Bunga-Melati-bagi-Kecantikan.jpg.webp',
             ],
             [
-                'club_title' => 'Club Mawar',
-                'slug' => Str::slug('Club Mawar'),
-                'image' => 'dummyClubMawar.webp',
+                'club_title' => 'Club Pendaki',
+                'slug' => Str::slug('Club Pendaki'),
+                'image_url' => 'https://indonesiatraveler.id/wp-content/uploads/2020/06/Gunung-Prau1.jpg',
             ],
             [
 
