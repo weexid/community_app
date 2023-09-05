@@ -18,7 +18,7 @@ class ClubMemberSeeder extends Seeder
         $faker = Faker::create('id_ID');
         $club_id = ['1','2','3','4', '5'];
 
-        for ($i=0; $i < 100; $i++) {
+        for ($i=0; $i < 50; $i++) {
             $key = array_rand($club_id);
             User::create([
                 'name' => $faker->name(),

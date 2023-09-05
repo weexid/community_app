@@ -19,11 +19,8 @@ class DatabaseSeeder extends Seeder
             ClubMemberSeeder::class,
             ClubActivitySeeder::class,
             ClubCarouselSeeder::class,
-            ActivitiesSeeder::class,
-            ArticleSeeder::class,
-            VideoSeeder::class,
             TagSeeder::class,
-            ActivityTagSeeder::class,
+            ActivitiesSeeder::class,
         
         ]);
     }

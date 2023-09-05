@@ -15,12 +15,10 @@ class ArticleSeeder extends Seeder
     public function run(): void
     {
 
-        $faker = Faker::create('id_ID');
-
         for($i = 0; $i < 10; $i++) {
             Article::create([
                 'activity_id' => $i+1,
-                'content' => $faker->paragraph(6),
+                'content' => "{\"ops\":[{\"insert\":\"Hello World\"},{\"attributes\":{\"align\":\"center\"},\"insert\":\"\\n\"}]}",
             ]);
         }
     }
