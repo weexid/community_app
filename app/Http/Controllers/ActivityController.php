@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Article\UpdateRequest;
 use App\Models\Activity;
 use App\Models\Article;
 use App\Models\Club;
 use App\Models\User;
 use App\Models\Video;
+use App\Repository\Article\ArticleRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
@@ -15,6 +17,13 @@ use Illuminate\Support\Str;
 
 class ActivityController extends Controller
 {
+
+    private $articleRepository;
+
+    public function __construct(ArticleRepository $articleRepo) {
+        $this->articleRepository = $articleRepo;
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -49,7 +58,7 @@ class ActivityController extends Controller
 
     public function render_videos(){
         $videos = Activity::with(['video:id,activity_id,video_src', 'tags:id,tag_name', 'club:id,club_title,slug'])
-            ->select('id','club_id', 'title', 'thumbnail', 'type', 'created_at')
+            ->select('id','club_id', 'title', 'slug', 'thumbnail', 'type', 'created_at')
             ->where('type', '=', 'video')
             ->orderByDesc('created_at')
             ->paginate(8);
@@ -176,14 +185,76 @@ class ActivityController extends Controller
         
     }
 
+    // to fetching relatedActivity from tags or club
+    public function relatedActivity(Activity $activity, string $type){
+        $tags = $activity->tags;
+        $club = $activity->club;
+        $relatedActivities = [];
+
+        if($tags->count() > 0){
+            foreach($tags as $tag){
+                $relatedActivitiesFromTag = $tag->activities()
+                    ->with('club:id,club_title,slug')
+                    ->where('activities.id', '<>', $activity->id)
+                    ->where('type', '=', $type)
+                    ->take(1)
+                    ->get(['activities.id', 'club_id', 'description' , 'title', 'slug', 'thumbnail', 'type']);
+
+                if ($relatedActivitiesFromTag->count() > 0) {
+                    $relatedActivity = $relatedActivitiesFromTag[0];
+
+                    $relatedActivity->description = Str::limit($relatedActivity->description, 50);
+                    $relatedActivities[] = $relatedActivity;
+                }
+            }
+        }
+        // jika tidak ada dari tags bisa kirimkan dari club terbaru
+        if(empty($relatedActivities)) {
+           $relatedFromClub = $club->activity()
+            ->with('club:id,club_title,slug')
+            ->where('activities.id', '<>', $activity->id)
+            ->where('type', '=', $type)
+            ->latest()
+            ->take(3)
+            ->get(['activities.id', 'club_id', 'description', 'title', 'slug', 'thumbnail', 'type']);
+
+            foreach($relatedFromClub as $relatedAct) {
+                $relatedAct->description = Str::limit($relatedAct->description, 50);
+            }
+
+            $relatedActivities = $relatedFromClub;
+        }
+
+        // dd($relatedActivities);
+        return $relatedActivities;
+    }
+
     /**
      * Display the specified resource.
      */
     public function show(Activity $activity)
     {   
-        return Inertia::render('Activity/Show', [
-            'activities' => $activity,
-        ]);
+        $relatedActivities = $this->relatedActivity($activity, $activity->type);
+
+        // dd($relatedActivities);
+
+        if($activity->type == 'article'){
+            $activity->article;
+
+            return Inertia::render('Activity/Show', [
+                'activity' => $activity,
+                'relatedActivity' => $relatedActivities,
+            ]);
+        }
+
+        if($activity->type == 'video'){
+            $activity->video;
+            return Inertia::render('Activity/Show', [
+                'activity' => $activity,
+                'relatedActivity' => $relatedActivities,
+            ]);
+        }
+        
     }
 
     /**
@@ -192,6 +263,23 @@ class ActivityController extends Controller
     public function edit(Activity $activity)
     {
         //
+    }
+
+    public function editArticle(Activity $activity)
+    {
+        $activity->load('article:id,activity_id,content','tags:id,tag_name');
+        $activity->makeHidden(['created_at','updated_at']);
+
+        return Inertia::render('Activity/EditArticle',[
+            'activity' => $activity
+        ]);
+    }
+
+    public function updateArticle(UpdateRequest $request, Activity $activity){
+
+        $this->articleRepository->updateArticle($activity, $request);
+        
+        return response(["msg" => "Success update data"], 200);
     }
 
     /**

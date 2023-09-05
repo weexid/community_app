@@ -15,24 +15,12 @@ use Inertia\Inertia;
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
-|
+| 
 | Here is where you can register web routes for your application. These
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-// Route::get('/', function () {
-//     return Inertia::render('Welcome', [
-//         'canLogin' => Route::has('login'),
-//         'canRegister' => Route::has('register'),
-//         'laravelVersion' => Application::VERSION,
-//         'phpVersion' => PHP_VERSION,
-//         'can' => [
-//             'isAdmin' => Gate::allows('isAdmin'),
-//         ],
-//     ]);
-// });
 
 Route::get('/', [HomeController::class, 'index']);
 
@@ -53,7 +41,6 @@ Route::prefix('club')->group(function() {
 Route::prefix('activity')->group(function() {
     Route::get('/', [ActivityController::class, 'index'])->name('activity.index');
     Route::get('/videos', [ActivityController::class, 'render_videos'])->name('acvitiy.videos');
-    Route::get('/{activity:slug}', [ActivityController::class, 'show'])->name('activity.show');
     
     // create articles
     Route::get('/create', [ActivityController::class, 'create'])->name('activity.create');
@@ -62,6 +49,15 @@ Route::prefix('activity')->group(function() {
     // create videos
     Route::get('/create-video', [ActivityController::class, 'create_video'])->name('activity.create.video');
     Route::post('/store-video', [ActivityController::class, 'store_video'])->name('activity.store.video');
+
+    
+    // get detail activity
+    Route::get('/{activity:slug}', [ActivityController::class, 'show'])->name('activity.show');
+    
+    // Get Edited Data and show to forms
+    Route::get('/edit-article/{activity:slug}', [ActivityController::class, 'editArticle'])->name('activity.edit');
+    Route::put('/update-article/{activity:slug}', [ActivityController::class, 'updateArticle'])->name('article.update');
+    
 });
 
 Route::prefix('tag')->group(function() {

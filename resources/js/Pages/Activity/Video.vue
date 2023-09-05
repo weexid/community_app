@@ -4,14 +4,14 @@
             <h1 class="text-3xl font-bold text-center">All Videos</h1>
         </div>
         <div class="flex flex-wrap gap-5 justify-center" v-if="!isLoading">
-            <Link :href="'#'" class="w-[45%]" v-for="video in videos" :key="video.id">
+            <!-- {{ videos }} -->
+            <Link :href="route('activity.show', video.slug)" class="w-[45%]" v-for="video in videos" :key="video.id">
                 <div class="w-full">
                     <img class="rounded-xl" :src="`https://img.youtube.com/vi/${video.thumbnail}/mqdefault.jpg`" :alt="video.title + '-' + video.id" />
                 </div>
                 <div class="p-3">
                     <h2 class="text-md font-bold">{{ video.title }}</h2>
                 </div>
-                
                 <div class="flex justify-between gap-2 px-3 pb-3 text-sm">
                     <div v-if="video.tags.length > 0">
                         <span class="inline-block mr-2 hover:text-pink-500 text-[12px]" v-for="tag in video.tags">
