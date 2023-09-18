@@ -29,7 +29,7 @@
 </template>
 
 <script setup>
-    import { Head, usePage } from '@inertiajs/vue3';
+    import { Head } from '@inertiajs/vue3';
     import Article from './Article.vue';
     import Video from './Video.vue';
     import AppLayout from '@/Layouts/AppLayout.vue';
